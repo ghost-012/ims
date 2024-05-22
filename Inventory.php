@@ -90,7 +90,7 @@ class Inventory {
 			$studentRows[] = $student['name'];
 			$studentRows[] = $student['address'];			
 			$studentRows[] = $student['mobile'];	
-			$studentRows[] = number_format($student['balance'],2);	
+			$studentRows[] = $student['balance'];	
 			$studentRows[] = '<button type="button" name="update" id="'.$student["id"].'" class="btn btn-primary btn-sm rounded-0 update" title="update"><i class="fa fa-edit"></i></button><button type="button" name="delete" id="'.$student["id"].'" class="btn btn-danger btn-sm rounded-0 delete" ><i class="fa fa-trash"></button>';
 			$studentRows[] = '';
 			$studentData[] = $studentRows;
