@@ -37,9 +37,9 @@ $inventory->checkLogin();
 									<tr>
 										<th>ID</th>										
 										<th>Name</th>
-										<th>Address</th>
+										<th>Department</th>
 										<th>Mobile</th>
-										<th>Balance</th>
+										<th>Student ID</th>
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -67,14 +67,14 @@ $inventory->checkLogin();
 									</div>
 									<div class="mb-3">
 										<label class="control-label">Mobile</label>
-										<input type="number" name="mobile" id="mobile" class="form-control rounded-0" required />
+										<input type="text" name="mobile" id="mobile" class="form-control rounded-0" required />
 									</div>
 									<div class="mb-3">
-										<label class="control-label">Balance</label>
-										<input type="number" name="balance" id="balance" class="form-control rounded-0" required />
+										<label class="control-label">Student ID</label>
+										<input type="text" name="balance" id="balance" class="form-control rounded-0" required />
 									</div>
 									<div class="mb-3">
-										<label class="control-label">Address</label>
+										<label class="control-label">Department</label>
 										<textarea name="address" id="address" class="form-control rounded-0" rows="5" required></textarea>
 									</div>
 								</form>

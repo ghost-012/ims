@@ -1,9 +1,9 @@
 </head>
-<body class="bg-gradient bg-#f5f5f5 bg-opacity-25">
-<nav role="navigation" class="navbar navbar-dark navbar-static-top bg-primary bg-gradient">
+<body class="bg-gradient bg-opacity-25" style="background-color: #e5f6df;">
+<nav role="navigation" class="navbar navbar-dark navbar-static-top bg-gradient" style="background-color: #a8d38d;">
     <div class="container">
       <div class="navbar-header">
-        <a href="" class="navbar-brand">Inventory Management System</a>
+        <a href="" class="navbar-brand" style="color: black;">Inventory Management System</a>
       </div>
     </div>
   </nav>

@@ -105,6 +105,7 @@ $inventory->checkLogin();
                                             <option value="Liters">Liters</option>
                                             <option value="Meter">Meter</option>
                                             <option value="Nos">Nos</option>
+                                            <option value="Pieces">pcs</option>
                                             <option value="Packet">Packet</option>
                                             <option value="Rolls">Rolls</option>
                                         </select>
