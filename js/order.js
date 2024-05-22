@@ -73,7 +73,7 @@ $(document).ready(function() {
                 $('#orderModal').modal('show');
                 $('#product').val(data.product_id);
                 $('#shipped').val(data.total_shipped);
-                $('#customer').val(data.customer_id);
+                $('#student').val(data.student_id);
                 $('.modal-title').html("<i class='fa fa-edit'></i> Edit Order");
                 $('#order_id').val(order_id);
                 $('#action').val("Edit");

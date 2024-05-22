@@ -5,14 +5,14 @@ class Inventory {
     private $password   = '';
     private $database  = 'ims_db';   
 	private $userTable = 'ims_user';	
-    private $customerTable = 'ims_customer';
+    private $studentTable = 'ims_student';
 	private $categoryTable = 'ims_category';
 	private $brandTable = 'ims_brand';
 	private $productTable = 'ims_product';
 	private $supplierTable = 'ims_supplier';
 	private $purchaseTable = 'ims_purchase';
 	private $orderTable = 'ims_order';
-	private $dbConnect = false;
+	public $dbConnect = false;
     public function __construct(){
         if(!$this->dbConnect){ 
             $conn = new mysqli($this->host, $this->user, $this->password, $this->database);
@@ -55,17 +55,17 @@ class Inventory {
 			header("Location:login.php");
 		}
 	}
-	public function getCustomer(){
+	public function getStudent(){
 		$sqlQuery = "
-			SELECT * FROM ".$this->customerTable." 
+			SELECT * FROM ".$this->studentTable." 
 			WHERE id = '".$_POST["userid"]."'";
 		$result = mysqli_query($this->dbConnect, $sqlQuery);	
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		echo json_encode($row);
 	}
 	
-	public function getCustomerList(){		
-		$sqlQuery = "SELECT * FROM ".$this->customerTable." ";
+	public function getStudentList(){		
+		$sqlQuery = "SELECT * FROM ".$this->studentTable." ";
 		if(!empty($_POST["search"]["value"])){
 			$sqlQuery .= '(id LIKE "%'.$_POST["search"]["value"].'%" ';
 			$sqlQuery .= '(name LIKE "%'.$_POST["search"]["value"].'%" ';
@@ -83,47 +83,47 @@ class Inventory {
 		}	
 		$result = mysqli_query($this->dbConnect, $sqlQuery);
 		$numRows = mysqli_num_rows($result);
-		$customerData = array();	
-		while( $customer = mysqli_fetch_assoc($result) ) {		
-			$customerRows = array();
-			$customerRows[] = $customer['id'];
-			$customerRows[] = $customer['name'];
-			$customerRows[] = $customer['address'];			
-			$customerRows[] = $customer['mobile'];	
-			$customerRows[] = number_format($customer['balance'],2);	
-			$customerRows[] = '<button type="button" name="update" id="'.$customer["id"].'" class="btn btn-primary btn-sm rounded-0 update" title="update"><i class="fa fa-edit"></i></button><button type="button" name="delete" id="'.$customer["id"].'" class="btn btn-danger btn-sm rounded-0 delete" ><i class="fa fa-trash"></button>';
-			$customerRows[] = '';
-			$customerData[] = $customerRows;
+		$studentData = array();	
+		while( $student = mysqli_fetch_assoc($result) ) {		
+			$studentRows = array();
+			$studentRows[] = $student['id'];
+			$studentRows[] = $student['name'];
+			$studentRows[] = $student['address'];			
+			$studentRows[] = $student['mobile'];	
+			$studentRows[] = number_format($student['balance'],2);	
+			$studentRows[] = '<button type="button" name="update" id="'.$student["id"].'" class="btn btn-primary btn-sm rounded-0 update" title="update"><i class="fa fa-edit"></i></button><button type="button" name="delete" id="'.$student["id"].'" class="btn btn-danger btn-sm rounded-0 delete" ><i class="fa fa-trash"></button>';
+			$studentRows[] = '';
+			$studentData[] = $studentRows;
 		}
 		$output = array(
 			"draw"				=>	intval($_POST["draw"]),
 			"recordsTotal"  	=>  $numRows,
 			"recordsFiltered" 	=> 	$numRows,
-			"data"    			=> 	$customerData
+			"data"    			=> 	$studentData
 		);
 		echo json_encode($output);
 	}
 
-	public function saveCustomer() {		
+	public function saveStudent() {		
 		$sqlInsert = "
-			INSERT INTO ".$this->customerTable."(name, address, mobile, balance) 
+			INSERT INTO ".$this->studentTable."(name, address, mobile, balance) 
 			VALUES ('".$_POST['cname']."', '".$_POST['address']."', '".$_POST['mobile']."', '".$_POST['balance']."')";		
 		mysqli_query($this->dbConnect, $sqlInsert);
-		echo 'New Customer Added';
+		echo 'New Student Added';
 	}			
-	public function updateCustomer() {
+	public function updateStudent() {
 		if($_POST['userid']) {	
 			$sqlInsert = "
-				UPDATE ".$this->customerTable." 
+				UPDATE ".$this->studentTable." 
 				SET name = '".$_POST['cname']."', address= '".$_POST['address']."', mobile = '".$_POST['mobile']."', balance = '".$_POST['balance']."' 
 				WHERE id = '".$_POST['userid']."'";		
 			mysqli_query($this->dbConnect, $sqlInsert);	
-			echo 'Customer Edited';
+			echo 'Student Edited';
 		}	
 	}	
-	public function deleteCustomer(){
+	public function deleteStudent(){
 		$sqlQuery = "
-			DELETE FROM ".$this->customerTable." 
+			DELETE FROM ".$this->studentTable." 
 			WHERE id = '".$_POST['userid']."'";		
 		mysqli_query($this->dbConnect, $sqlQuery);		
 	}
@@ -355,8 +355,8 @@ class Inventory {
 	}
 	public function addProduct() {		
 		$sqlInsert = "
-			INSERT INTO ".$this->productTable."(categoryid, brandid, pname, model, description, quantity, unit, base_price, tax, minimum_order, supplier) 
-			VALUES ('".$_POST["categoryid"]."', '".$_POST['brandid']."', '".$_POST['pname']."', '".$_POST['pmodel']."', '".$_POST['description']."', '".$_POST['quantity']."', '".$_POST['unit']."', '".$_POST['base_price']."', '".$_POST['tax']."', 1, '".$_POST['supplierid']."')";		
+			INSERT INTO ".$this->productTable."(categoryid, brandid, pname, model, description, quantity, unit, base_price, minimum_order, supplier) 
+			VALUES ('".$_POST["categoryid"]."', '".$_POST['brandid']."', '".$_POST['pname']."', '".$_POST['pmodel']."', '".$_POST['description']."', '".$_POST['quantity']."', '".$_POST['unit']."', '".$_POST['base_price']."', 1, '".$_POST['supplierid']."')";		
 		mysqli_query($this->dbConnect, $sqlInsert);
 		echo 'New Product Added';
 	}	
@@ -376,7 +376,6 @@ class Inventory {
 			$output['quantity'] = $product['quantity'];
 			$output['unit'] = $product['unit'];
 			$output['base_price'] = $product['base_price'];
-			$output['tax'] = $product['tax'];
 			$output['supplier'] = $product['supplier'];
 		}
 		echo json_encode($output);
@@ -384,7 +383,7 @@ class Inventory {
 	public function updateProduct() {		
 		if($_POST['pid']) {	
 			$sqlUpdate = "UPDATE ".$this->productTable." 
-				SET categoryid = '".$_POST['categoryid']."', brandid='".$_POST['brandid']."', pname='".$_POST['pname']."', model='".$_POST['pmodel']."', description='".$_POST['description']."', quantity='".$_POST['quantity']."', unit='".$_POST['unit']."', base_price='".$_POST['base_price']."', tax='".$_POST['tax']."', supplier='".$_POST['supplierid']."' WHERE pid = '".$_POST["pid"]."'";			
+				SET categoryid = '".$_POST['categoryid']."', brandid='".$_POST['brandid']."', pname='".$_POST['pname']."', model='".$_POST['pmodel']."', description='".$_POST['description']."', quantity='".$_POST['quantity']."', unit='".$_POST['unit']."', base_price='".$_POST['base_price']."', supplier='".$_POST['supplierid']."' WHERE pid = '".$_POST["pid"]."'";			
 			mysqli_query($this->dbConnect, $sqlUpdate);	
 			echo 'Product Update';
 		}	
@@ -439,10 +438,6 @@ class Inventory {
 			<tr>
 				<td>Base Price</td>
 				<td>'.$product["base_price"].'</td>
-			</tr>
-			<tr>
-				<td>Tax (%)</td>
-				<td>'.$product["tax"].'</td>
 			</tr>
 			<tr>
 				<td>Enter By</td>
@@ -608,7 +603,7 @@ class Inventory {
 	// order
 	public function listOrders(){		
 		$sqlQuery = "SELECT * FROM ".$this->orderTable." as o
-			INNER JOIN ".$this->customerTable." as c ON c.id = o.customer_id
+			INNER JOIN ".$this->studentTable." as c ON c.id = o.student_id
 			INNER JOIN ".$this->productTable." as p ON p.pid = o.product_id ";		
 		if(isset($_POST['order'])) {
 			$sqlQuery .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
@@ -641,8 +636,8 @@ class Inventory {
 	}
 	public function addOrder() {		
 		$sqlInsert = "
-			INSERT INTO ".$this->orderTable."(product_id, total_shipped, customer_id) 
-			VALUES ('".$_POST['product']."', '".$_POST['shipped']."', '".$_POST['customer']."')";		
+			INSERT INTO ".$this->orderTable."(product_id, total_shipped, student_id) 
+			VALUES ('".$_POST['product']."', '".$_POST['shipped']."', '".$_POST['student']."')";		
 		mysqli_query($this->dbConnect, $sqlInsert);
 		echo 'New order added';
 	}		
@@ -658,7 +653,7 @@ class Inventory {
 		if($_POST['order_id']) {	
 			$sqlUpdate = "
 				UPDATE ".$this->orderTable." 
-				SET product_id = '".$_POST['product']."', total_shipped='".$_POST['shipped']."', customer_id='".$_POST['customer']."' WHERE order_id = '".$_POST['order_id']."'";		
+				SET product_id = '".$_POST['product']."', total_shipped='".$_POST['shipped']."', student_id='".$_POST['student']."' WHERE order_id = '".$_POST['order_id']."'";		
 			mysqli_query($this->dbConnect, $sqlUpdate);	
 			echo 'Order Edited';
 		}	
@@ -669,12 +664,12 @@ class Inventory {
 			WHERE order_id = '".$_POST['order_id']."'";		
 		mysqli_query($this->dbConnect, $sqlQuery);		
 	}
-	public function customerDropdownList(){	
-		$sqlQuery = "SELECT * FROM ".$this->customerTable." ORDER BY name ASC";
+	public function studentDropdownList(){	
+		$sqlQuery = "SELECT * FROM ".$this->studentTable." ORDER BY name ASC";
 		$result = mysqli_query($this->dbConnect, $sqlQuery);
 		$dropdownHTML = '';
-		while( $customer = mysqli_fetch_assoc($result) ) {	
-			$dropdownHTML .= '<option value="'.$customer["id"].'">'.$customer["name"].'</option>';
+		while( $student = mysqli_fetch_assoc($result) ) {	
+			$dropdownHTML .= '<option value="'.$student["id"].'">'.$student["name"].'</option>';
 		}
 		return $dropdownHTML;
 	}

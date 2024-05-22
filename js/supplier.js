@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#addSupplier').click(function() {
         $('#supplierModal').modal('show');
         $('#supplierForm')[0].reset();
-        $('.modal-title').html("<i class='fa fa-plus'></i> Add Customer");
+        $('.modal-title').html("<i class='fa fa-plus'></i> Add Student");
         $('#action').val("Add");
         $('#btn_action').val("addSupplier");
     });

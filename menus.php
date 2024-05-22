@@ -7,13 +7,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="nav navbar-nav menus">		
 				<li class="nav-item"><a class="nav-link" href="index.php" id="index_menu">Home</a></li>
-				<li class="nav-item"><a class="nav-link" href="customer.php" id="customer_menu">Customer</a></li>
+				<li class="nav-item"><a class="nav-link" href="student.php" id="student_menu">Student</a></li>
 				<li class="nav-item"><a class="nav-link" href="category.php" id="category_menu">Category</a></li>
 				<li class="nav-item"><a class="nav-link" href="brand.php" id="brand_menu">Brand</a></li>
 				<li class="nav-item"><a class="nav-link" href="supplier.php" id="supplier_menu">Supplier</a></li>
 				<li class="nav-item"><a class="nav-link" href="product.php" id="product_menu">Product</a></li>
-				<li class="nav-item"><a class="nav-link" href="purchase.php" id="purchase_menu">Purchase</a></li>
-				<li class="nav-item"><a class="nav-link" href="order.php" id="order_menu">Orders</a></li>			
+				<li class="nav-item"><a class="nav-link" href="borrow_records.php" id="borrow_records_menu">Borrow Records</a></li>
+				<!-- <li class="nav-item"><a class="nav-link" href="purchase.php" id="purchase_menu">Purchase</a></li>
+				<li class="nav-item"><a class="nav-link" href="order.php" id="order_menu">Orders</a></li>			 -->
 			</ul>
 		</div>
 		<ul class="nav navbar-nav">

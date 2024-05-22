@@ -10,21 +10,21 @@ if(!empty($_GET['action']) && $_GET['action'] == 'logout') {
 if(!empty($_POST['action']) && $_POST['action'] == 'getInventoryDetails') {
 	$inventory->getInventoryDetails();
 }
-// Customer management
-if(!empty($_POST['action']) && $_POST['action'] == 'customerList') {
-	$inventory->getCustomerList();
+// Student management
+if(!empty($_POST['action']) && $_POST['action'] == 'studentList') {
+	$inventory->getStudentList();
 }
-if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'customerAdd'){
-	$inventory->saveCustomer();
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'studentAdd'){
+	$inventory->saveStudent();
 }
-if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'getCustomer'){
-	$inventory->getCustomer();
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'getStudent'){
+	$inventory->getStudent();
 }
-if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'customerUpdate'){
-	$inventory->updateCustomer();
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'studentUpdate'){
+	$inventory->updateStudent();
 }
-if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'customerDelete'){
-	$inventory->deleteCustomer();
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'studentDelete'){
+	$inventory->deleteStudent();
 }
 // Category management
 if(!empty($_POST['action']) && $_POST['action'] == 'categoryList') {

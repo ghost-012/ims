@@ -38,7 +38,7 @@ $inventory->checkLogin();
                                     <th>ID</th>      
 									<th>Product</th>	
 									<th>Total Item</th> 
-									<th>Customer</th> 									
+									<th>Student</th> 									
                                     <th>Action</th>
                                 </tr></thead>
                             </table>
@@ -73,10 +73,10 @@ $inventory->checkLogin();
                                     </div>
                                 </div> 
                                 <div class="mb-3">
-                                    <label>Customer Name</label>
-                                    <select name="customer" id="customer" class="form-select rounded-0" required>
-                                        <option value="">Select Customer</option>
-                                        <?php echo $inventory->customerDropdownList();?>
+                                    <label>Student Name</label>
+                                    <select name="student" id="student" class="form-select rounded-0" required>
+                                        <option value="">Select Student</option>
+                                        <?php echo $inventory->studentDropdownList();?>
                                     </select>
                                 </div>	
                             </form>
